@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import time, sys
 import dlib
 import numpy as np
