@@ -22,7 +22,6 @@ It waits for a face, and then will light up his backpack when that face is visib
 
 import asyncio
 import time
-
 import cozmo
 
 
@@ -32,7 +31,7 @@ def light_when_face(robot: cozmo.robot.Robot):
     # Move lift down and tilt the head up
     robot.move_lift(-3)
     robot.set_head_angle(cozmo.robot.MAX_HEAD_ANGLE).wait_for_completed()
-
+    #robot.camera.color_image_enabled = True
     face = None
 
     print("Press CTRL-C to quit")
@@ -45,11 +44,32 @@ def light_when_face(robot: cozmo.robot.Robot):
             # Wait until we we can see another face
             try:
                 face = robot.world.wait_for_observed_face(timeout=30)
+                take_photo(robot);
             except asyncio.TimeoutError:
                 print("Didn't find a face.")
                 return
 
         time.sleep(.1)
 
+
+
+###### Taking photo ######
+def take_photo(robot:cozmo.robot.Robot, cmd_args = None):
+    robot.camera.image_stream_enabled = True
+    #robot.camera.color_image_enabled = True
+    print("taking a picture...")
+    message = ""
+    pic_filename = "cozmo_pic_" + str(int(time.time())) + ".png"
+    robot.say_text("Take a photo!").wait_for_completed()
+    latest_image = robot.world.latest_image
+    if latest_image:
+        latest_image.raw_image.convert('L').save('img/'+pic_filename)
+        message =  "picture saved as: " + pic_filename
+    else:
+        message = "no picture saved"
+    robot.camera.image_stream_enabled = False
+    return message
+
+######## Object recognition ###########
 
 cozmo.run_program(light_when_face, use_viewer=True, force_viewer_on_top=True)
