@@ -22,7 +22,6 @@ and then constantly turn towards it to keep it in frame.
 
 import asyncio
 import time
-
 import cozmo
 
 

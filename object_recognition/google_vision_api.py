@@ -72,19 +72,3 @@ def detect_labels(robot:cozmo.robot.Robot,path):
 
 if __name__ == '__main__':
     cozmo.run_program(light_when_face, use_viewer=True, force_viewer_on_top=True)
-
-
-
-
-
-
-
-
-
-
-
-
-
-path = os.path.join(
-    os.path.dirname(__file__),
-    'img/1.jpg')

@@ -52,9 +52,9 @@ def custom_objects(robot: cozmo.robot.Robot):
     # define a unique cube (44mm x 44mm x 44mm) (approximately the same size as a light cube)
     # with a 30mm x 30mm Diamonds2 image on every face
     cube_obj = robot.world.define_custom_cube(CustomObjectTypes.CustomType00,
-                                              CustomObjectMarkers.Diamonds2,
-                                              44,
-                                              30, 30, True)
+                                              CustomObjectMarkers.Diamonds4,
+                                              50,
+                                              23, 23, True)
 
     # define a unique cube (88mm x 88mm x 88mm) (approximately 2x the size of a light cube)
     # with a 50mm x 50mm Diamonds3 image on every face
